@@ -3,16 +3,16 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {       
+    await queryInterface.createTable('users', { 
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
+        allowNull: false,
         primaryKey: true,
-        allowNull: false
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       profession: {
         type: Sequelize.STRING,
@@ -25,11 +25,11 @@ module.exports = {
       role: {
         type: Sequelize.ENUM,
         values: ['admin', 'student'],
-        allowNull:false
+        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
@@ -42,7 +42,7 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false
-      }
+      },
     });
 
     await queryInterface.addConstraint('users', {
@@ -51,8 +51,12 @@ module.exports = {
       name: 'UNIQUE_USERS_EMAIL'
     })
   },
-
   async down (queryInterface, Sequelize) {
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+    */
     await queryInterface.dropTable('users');
   }
 };
